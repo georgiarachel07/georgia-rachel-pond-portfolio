@@ -1,0 +1,7 @@
+import { Link } from 'react-router-dom'
+import FunnelBarrel from './FunnelBarrel'
+import { useFunnelModal } from './FunnelModal'
+import { gymFunnel,bookingFunnel,websiteFunnel } from '@/data/funnels'
+const projects=[...gymFunnel,...bookingFunnel,...websiteFunnel]
+const repos=['pulse-kpi-dashboard','team-automation-hub','aegis-shield']
+export default function WorkGallery(){const {openFull,modal}=useFunnelModal();return <section className="project-gallery"><span className="view__eyebrow">FIELDWORK / OPEN TO EXPLORE</span><div className="pond-gallery-head"><h1>Built to work. Ready to try.</h1><Link to="/ai">AI systems ↗</Link></div><p>Explore the project carousel, open an interactive preview, or visit the live application. Each project is open source.</p><FunnelBarrel funnels={projects} onOpen={openFull}/><div className="live-project-cards">{projects.map((p,i)=><article key={p.label} className="live-project-card"><img src={import.meta.env.BASE_URL+'project-'+['pulse','relay','aegis'][i]+'.webp'} alt={p.label+' interface'}/><div><h2>{p.label}</h2><p>{p.desc}</p><div className="live-project-links"><button onClick={e=>openFull(p,e.currentTarget)}>Try preview ↗</button><a href={'https://georgiarachel07.github.io/'+repos[i]+'/'} target="_blank" rel="noreferrer">Live site ↗</a><a href={'https://github.com/georgiarachel07/'+repos[i]} target="_blank" rel="noreferrer">GitHub ↗</a></div></div></article>)}</div>{modal}</section>}
